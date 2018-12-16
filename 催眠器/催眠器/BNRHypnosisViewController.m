@@ -31,6 +31,8 @@
     // Do any additional setup after loading the view.
     BNRHypnosisView *backgroundView = [[BNRHypnosisView alloc] init];
     self.view = backgroundView;
+
+    NSLog(@"催眠视图加载了。。。");
 }
 
 /*
