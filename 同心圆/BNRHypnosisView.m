@@ -9,15 +9,36 @@
 #import "AppDelegate.h"
 #import "BNRHypnosisView.h"
 
+@interface BNRHypnosisView()
+@property(nonatomic, strong) UIColor *circleColor;
+@end
+
 @implementation BNRHypnosisView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
+        self.circleColor = [UIColor lightGrayColor];
     }
 
     return self;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
+//    [super touchesBegan:touches withEvent:event];
+    NSLog(@"self = %@ 被摸了", self);
+    CGFloat red = (arc4random() % 100) / 100.0;
+    CGFloat green = (arc4random() % 100) / 100.0;
+    CGFloat blue = (arc4random() % 100) / 100.0;
+
+    UIColor *randomColor = [[UIColor alloc] initWithRed:red green:green blue:blue alpha:1.0];
+    self.circleColor = randomColor;
+}
+
+- (void)setCircleColor:(UIColor *)circleColor {
+    _circleColor = circleColor;
+    [self setNeedsDisplay];
 }
 
 // Only override drawRect: if you perform custom drawing.
@@ -30,7 +51,6 @@
     center.x = bounds.origin.x + bounds.size.width / 2.0;
     center.y = bounds.origin.y + bounds.size.height / 2.0;
 
-//    CGFloat radius = (MIN(bounds.size.width, bounds.size.height) / 2.0);
     CGFloat radius = hypot(bounds.size.width, bounds.size.height) / 2.0;
 
     UIBezierPath *bezierPath = [[UIBezierPath alloc] init];
@@ -42,7 +62,7 @@
 
     bezierPath.lineWidth = 10;
 
-    [[UIColor lightGrayColor] setStroke];
+    [self.circleColor setStroke];
 
     [bezierPath stroke];
 
