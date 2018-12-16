@@ -19,6 +19,17 @@
     // Do any additional setup after loading the view.
 }
 
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.tabBarItem.title = @"计时";
+        UIImage *image = [UIImage imageNamed:@"Time"];
+        self.tabBarItem.image = image;
+    }
+
+    return self;
+}
+
 - (IBAction)addReminder:(id)sender
 {
     NSDate *date = self.datePicker.date;
