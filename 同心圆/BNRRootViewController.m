@@ -11,23 +11,17 @@
 
 @implementation BNRRootViewController
 - (void)loadView {
-    BNRHypnosisView *backgroundView = [[BNRHypnosisView alloc] init];
-//    backgroundView.backgroundColor = [UIColor whiteColor];
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    self.view = scrollView;
 
-//    CGRect firstFrame = CGRectMake(375.0/2, 240, 100, 150);
-//    CGRect firstFrame = self.
-//    BNRHypnosisView *firstView = [[BNRHypnosisView alloc] initWithFrame:firstFrame];
-//    firstView.backgroundColor = [UIColor redColor];
+    CGRect bigRect = [[UIScreen mainScreen] bounds];
+    bigRect.size.height *= 2;
+    bigRect.size.width *= 2;
 
-//    [backgroundView addSubview:firstView];
+    BNRHypnosisView *hypnosisView = [[BNRHypnosisView alloc] initWithFrame:bigRect];
 
-//    CGRect secondFrame = CGRectMake(20, 30, 50, 50);
-//    BNRHypnosisView *secondView = [[BNRHypnosisView alloc] initWithFrame:secondFrame];
-//    secondView.backgroundColor = [UIColor blueColor];
-//    [backgroundView addSubview:secondView];
-//    [firstView addSubview:secondView];
-
-    self.view = backgroundView;
+    [scrollView addSubview:hypnosisView];
+    scrollView.contentSize = bigRect.size;
 }
 
 @end
