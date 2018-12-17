@@ -15,6 +15,13 @@
 
 @implementation BNRHypnosisViewController
 
+- (void)loadView {
+    [super loadView];
+
+    BNRHypnosisView *backgroundView = [[BNRHypnosisView alloc] init];
+    self.view = backgroundView;
+}
+
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -29,8 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    BNRHypnosisView *backgroundView = [[BNRHypnosisView alloc] init];
-    self.view = backgroundView;
 
     NSLog(@"催眠视图加载了。。。");
 }
