@@ -11,5 +11,8 @@
 
 @interface BNRItemsViewController : UITableViewController
 
+- (instancetype)init;
+
+- (instancetype)initWithStyle:(UITableViewStyle)style;
 @end
 

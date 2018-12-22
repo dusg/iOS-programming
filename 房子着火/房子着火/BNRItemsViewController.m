@@ -28,20 +28,34 @@
             dequeueReusableCellWithIdentifier:@"UITableViewCell"
             forIndexPath:indexPath];
 
-    NSArray *items = [[BNRItemStore sharedStore] allItems];
+    NSArray *items = nil;
+    if (indexPath.section == 1) {
+        items = [[BNRItemStore sharedStore] itemsBigger];
+    } else {
+        items = [[BNRItemStore sharedStore] itemsLittle];
+    }
+
     cell.textLabel.text = [items[indexPath.row] description];
 
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[[BNRItemStore sharedStore] allItems] count];
+    if (section == 1) {
+        return [[[BNRItemStore sharedStore] itemsBigger] count];
+    } else {
+        return [[[BNRItemStore sharedStore] itemsLittle] count];
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
 }
 
 - (instancetype)init {
-    self = [super initWithStyle:UITableViewStylePlain];
+    self = [super initWithStyle:UITableViewCellStyleValue2|UITableViewStyleGrouped];
     if (self) {
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < 15; ++i) {
             [[BNRItemStore sharedStore] createItem];
         }
     }

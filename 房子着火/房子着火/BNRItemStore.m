@@ -49,4 +49,23 @@
     return nil;
 }
 
+- (NSArray *)itemsBigger {
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    for (BNRItem *item in self.allItems) {
+        if (item.valueInDollars > 50) {
+            [items addObject:item];
+        }
+    }
+    return items;
+}
+
+- (NSArray *)itemsLittle {
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    for (BNRItem *item in self.allItems) {
+        if (item.valueInDollars <= 50) {
+            [items addObject:item];
+        }
+    }
+    return items;
+}
 @end

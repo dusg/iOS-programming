@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(instancetype)sharedStore;
 -(BNRItem *)createItem;
+
+- (NSArray *)itemsBigger;
+
+- (NSArray *)itemsLittle;
 @end
 
 NS_ASSUME_NONNULL_END
