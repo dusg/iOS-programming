@@ -15,9 +15,9 @@
 
 + (instancetype)randomItem {
     // 创建不可变数组对象，包含三个形容词
-    NSArray *randomAdjectiveList = @[@"Fluffy", @"Rusty", @"Shiny"];
+    NSArray *randomAdjectiveList = @[@"巨大的", @"柔软的", @"坚硬的", @"短小的"];
     // 创建不可变数组对象，包含三个名词
-    NSArray *randomNounList = @[@"Bear", @"Spork", @"Mac"];
+    NSArray *randomNounList = @[@"🐻", @"🐓🐓", @"OO", @"那话儿"];
 
     NSUInteger adjectiveIndex = arc4random() % [randomAdjectiveList count];
     NSUInteger nounIndex = arc4random() % [randomNounList count];
