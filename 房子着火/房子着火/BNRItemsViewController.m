@@ -76,13 +76,18 @@
             forIndexPath:indexPath];
 
     NSArray *items = [[BNRItemStore sharedStore] allItems];
-    cell.textLabel.text = [items[indexPath.row] description];
+
+    if (indexPath.row == [items count]) {
+        cell.textLabel.text = @"我是有底线的～";
+    } else {
+        cell.textLabel.text = [items[indexPath.row] description];
+    }
 
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[[BNRItemStore sharedStore] allItems] count];
+    return [[[BNRItemStore sharedStore] allItems] count] + 1;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
@@ -102,6 +107,29 @@
 
 - (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
     return @"删除";
+}
+
+//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (indexPath.row == [[[BNRItemStore sharedStore] allItems] count]) {
+//        return UITableViewCellEditingStyleNone;
+//    }
+//    return UITableViewCellEditingStyleInsert|UITableViewCellEditingStyleDelete;
+//}
+- (NSIndexPath *)tableView:(UITableView *)tableView
+targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+       toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
+    if (sourceIndexPath.row == [[[BNRItemStore sharedStore] allItems] count]) {
+        return sourceIndexPath;
+    }
+
+    return proposedDestinationIndexPath;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < [[[BNRItemStore sharedStore] allItems] count]) {
+        return YES;
+    }
+    return NO;
 }
 
 @end
