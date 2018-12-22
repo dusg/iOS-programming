@@ -46,12 +46,16 @@
 
         [self.view addSubview:label];
         //添加视差效果
-        UIInterpolatingMotionEffect *motionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+        UIInterpolatingMotionEffect *motionEffect = [[UIInterpolatingMotionEffect alloc]
+                initWithKeyPath:@"center.x"
+                           type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
         motionEffect.minimumRelativeValue = @(-25);
         motionEffect.maximumRelativeValue = @(25);
         [label addMotionEffect:motionEffect];
 
-        motionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+        motionEffect = [[UIInterpolatingMotionEffect alloc]
+                initWithKeyPath:@"center.y"
+                           type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
         motionEffect.minimumRelativeValue = @(-25);
         motionEffect.maximumRelativeValue = @(25);
         [label addMotionEffect:motionEffect];
