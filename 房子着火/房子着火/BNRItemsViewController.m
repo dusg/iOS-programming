@@ -16,10 +16,19 @@
 @end
 
 @implementation BNRItemsViewController
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([tableView numberOfRowsInSection:0]-1 == indexPath.row) {
+        return 44;
+    }
+    return 60;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.tableView registerClass:[UITableViewCell class]
             forCellReuseIdentifier:@"UITableViewCell"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background"]];
+    self.tableView.backgroundView = imageView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -39,7 +48,7 @@
 }
 
 - (instancetype)init {
-    self = [super initWithStyle:UITableViewStylePlain];
+    self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         for (int i = 0; i < 5; ++i) {
             [[BNRItemStore sharedStore] createItem];
