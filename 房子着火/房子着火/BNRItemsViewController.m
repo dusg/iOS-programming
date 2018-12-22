@@ -118,11 +118,13 @@
 - (NSIndexPath *)tableView:(UITableView *)tableView
 targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
        toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
-    if (sourceIndexPath.row == [[[BNRItemStore sharedStore] allItems] count]) {
-        return sourceIndexPath;
+    NSInteger count = [[[BNRItemStore sharedStore] allItems] count];
+    NSInteger row = proposedDestinationIndexPath.row;
+    if (row >= count) {
+        row = count - 1;
     }
-
-    return proposedDestinationIndexPath;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:proposedDestinationIndexPath.section];
+    return indexPath;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -130,6 +132,13 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
         return YES;
     }
     return NO;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == [[[BNRItemStore sharedStore] allItems] count]) {
+        return NO;
+    }
+    return YES;
 }
 
 @end
