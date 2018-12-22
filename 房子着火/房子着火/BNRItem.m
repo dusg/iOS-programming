@@ -64,13 +64,9 @@
 }
 
 - (NSString *)description {
-    NSMutableString *description = [NSMutableString stringWithFormat:@"%@: ", NSStringFromClass([self class])];
-
     NSString *str = [[NSString alloc] initWithFormat:@"%@(%@): Worth $%d, recorded on %@", self.itemName, self.serialNumber, self.valueInDollars, self.dateCreated];
 
-    [description appendString:str];
-
-    return description;
+    return str;
 }
 
 - (void)setContainedItem:(BNRItem *)containedItem {
