@@ -18,13 +18,6 @@
 +(instancetype)randomItem;
 + (instancetype)itemWithItemName:(NSString *)itemName;
 
-/**
- * @brief BNRItem类的指定初始化方法
- * @param name nsstring
- * @param number nsstring
- * @param value int
- * @return id
- */
 - (instancetype)initWithItemName:(NSString *)name serialNumber:(NSString *)number valueInDollars:(int)value;
 
 - (instancetype)initWithItemName:(NSString *)itemName;

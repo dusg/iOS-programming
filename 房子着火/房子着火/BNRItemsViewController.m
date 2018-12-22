@@ -10,13 +10,14 @@
 #import "BNRItemsViewController.h"
 #import "BNRItemStore.h"
 
-@interface BNRItemsViewController()<UITableViewDataSource>
+@interface BNRItemsViewController()
 
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 
 @end
 
 @implementation BNRItemsViewController
+
 - (instancetype)init {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
@@ -84,5 +85,13 @@
     return [[[BNRItemStore sharedStore] allItems] count];
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+        forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        BNRItem *item = [[BNRItemStore sharedStore] allItems][indexPath.row];
+        [[BNRItemStore sharedStore] removeItem:item];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
 
 @end
