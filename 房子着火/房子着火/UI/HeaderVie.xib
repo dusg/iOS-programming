@@ -24,7 +24,7 @@
                     <rect key="frame" x="304" y="7" width="55" height="48"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <state key="normal" title="新建"/>
+                    <state key="normal" title="添加"/>
                     <connections>
                         <action selector="addNewItem:" destination="-1" eventType="touchUpInside" id="OGO-zi-Qef"/>
                     </connections>
