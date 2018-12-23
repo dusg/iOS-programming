@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "BNRItemsViewController.h"
 #import "BNRItemStore.h"
+#import "BNRDetailViewController.h"
+
 
 @interface BNRItemsViewController()
 
@@ -77,17 +79,18 @@
 
     NSArray *items = [[BNRItemStore sharedStore] allItems];
 
-    if (indexPath.row == [items count]) {
-        cell.textLabel.text = @"我是有底线的～";
-    } else {
-        cell.textLabel.text = [items[indexPath.row] description];
-    }
+//    if (indexPath.row == [items count]) {
+//        cell.textLabel.text = @"我是有底线的～";
+//    } else {
+//        cell.textLabel.text = [items[indexPath.row] description];
+//    }
 
+    cell.textLabel.text = [items[indexPath.row] description];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[[BNRItemStore sharedStore] allItems] count] + 1;
+    return [[[BNRItemStore sharedStore] allItems] count];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
@@ -115,30 +118,42 @@
 //    }
 //    return UITableViewCellEditingStyleInsert|UITableViewCellEditingStyleDelete;
 //}
-- (NSIndexPath *)tableView:(UITableView *)tableView
-targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
-       toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
-    NSInteger count = [[[BNRItemStore sharedStore] allItems] count];
-    NSInteger row = proposedDestinationIndexPath.row;
-    if (row >= count) {
-        row = count - 1;
-    }
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:proposedDestinationIndexPath.section];
-    return indexPath;
+//- (NSIndexPath *)tableView:(UITableView *)tableView
+//targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+//       toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
+//    NSInteger count = [[[BNRItemStore sharedStore] allItems] count];
+//    NSInteger row = proposedDestinationIndexPath.row;
+//    if (row >= count) {
+//        row = count - 1;
+//    }
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:proposedDestinationIndexPath.section];
+//    return indexPath;
+//}
+
+//- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (indexPath.row < [[[BNRItemStore sharedStore] allItems] count]) {
+//        return YES;
+//    }
+//    return NO;
+//}
+
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (indexPath.row == [[[BNRItemStore sharedStore] allItems] count]) {
+//        return NO;
+//    }
+//    return YES;
+//}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] init];
+    BNRItem *item = [[BNRItemStore sharedStore] allItems][indexPath.row];
+    detailViewController.item = item;
+    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < [[[BNRItemStore sharedStore] allItems] count]) {
-        return YES;
-    }
-    return NO;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == [[[BNRItemStore sharedStore] allItems] count]) {
-        return NO;
-    }
-    return YES;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 @end
