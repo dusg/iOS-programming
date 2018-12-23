@@ -8,6 +8,7 @@
 
 #import "BNRDetailViewController.h"
 #import "BNRItem.h"
+#import "BNREditDateController.h"
 
 @interface BNRDetailViewController ()
 
@@ -19,6 +20,12 @@
 @end
 
 @implementation BNRDetailViewController
+- (IBAction)editDate:(id)sender {
+    BNREditDateController *controller = [[BNREditDateController alloc] init];
+    controller.item = self.item;
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 - (IBAction)valueEditEnd:(UIButton *)sender {
     [self.valueField resignFirstResponder];
 }

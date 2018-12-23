@@ -10,6 +10,8 @@
 		2EFE9E343B17DA0A2696B4D1 /* BNRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE9A911E96E510842FF6FB /* BNRItem.m */; };
 		C810F1C921CF3769000F0203 /* BNRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C810F1C721CF3769000F0203 /* BNRDetailViewController.m */; };
 		C810F1CA21CF3769000F0203 /* BNRDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C810F1C821CF3769000F0203 /* BNRDetailViewController.xib */; };
+		C810F1CF21CF72D5000F0203 /* BNREditDateController.m in Sources */ = {isa = PBXBuildFile; fileRef = C810F1CD21CF72D5000F0203 /* BNREditDateController.m */; };
+		C810F1D021CF72D5000F0203 /* BNREditDateController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C810F1CE21CF72D5000F0203 /* BNREditDateController.xib */; };
 		C888987F21CA83E600C97BFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C888987E21CA83E600C97BFA /* AppDelegate.m */; };
 		C888988521CA83E600C97BFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C888988321CA83E600C97BFA /* Main.storyboard */; };
 		C888988721CA83E700C97BFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C888988621CA83E700C97BFA /* Assets.xcassets */; };
@@ -25,6 +27,9 @@
 		C810F1C621CF3769000F0203 /* BNRDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BNRDetailViewController.h; sourceTree = "<group>"; };
 		C810F1C721CF3769000F0203 /* BNRDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNRDetailViewController.m; sourceTree = "<group>"; };
 		C810F1C821CF3769000F0203 /* BNRDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BNRDetailViewController.xib; sourceTree = "<group>"; };
+		C810F1CC21CF72D5000F0203 /* BNREditDateController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BNREditDateController.h; sourceTree = "<group>"; };
+		C810F1CD21CF72D5000F0203 /* BNREditDateController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNREditDateController.m; sourceTree = "<group>"; };
+		C810F1CE21CF72D5000F0203 /* BNREditDateController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BNREditDateController.xib; sourceTree = "<group>"; };
 		C888987A21CA83E600C97BFA /* 房子着火.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "房子着火.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C888987D21CA83E600C97BFA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C888987E21CA83E600C97BFA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -54,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				C810F1C821CF3769000F0203 /* BNRDetailViewController.xib */,
+				C810F1CE21CF72D5000F0203 /* BNREditDateController.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -61,6 +67,8 @@
 		C810F1CB21CF377C000F0203 /* UI Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C810F1CC21CF72D5000F0203 /* BNREditDateController.h */,
+				C810F1CD21CF72D5000F0203 /* BNREditDateController.m */,
 				C810F1C621CF3769000F0203 /* BNRDetailViewController.h */,
 				C810F1C721CF3769000F0203 /* BNRDetailViewController.m */,
 				C888989321CA854300C97BFA /* BNRItemsViewController.h */,
@@ -165,6 +173,7 @@
 			files = (
 				C888988A21CA83E700C97BFA /* LaunchScreen.storyboard in Resources */,
 				C888988721CA83E700C97BFA /* Assets.xcassets in Resources */,
+				C810F1D021CF72D5000F0203 /* BNREditDateController.xib in Resources */,
 				C888988521CA83E600C97BFA /* Main.storyboard in Resources */,
 				C810F1CA21CF3769000F0203 /* BNRDetailViewController.xib in Resources */,
 			);
@@ -177,6 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C810F1CF21CF72D5000F0203 /* BNREditDateController.m in Sources */,
 				C810F1C921CF3769000F0203 /* BNRDetailViewController.m in Sources */,
 				C888989821CA899D00C97BFA /* BNRItemStore.m in Sources */,
 				C888989521CA854300C97BFA /* BNRItemsViewController.m in Sources */,
