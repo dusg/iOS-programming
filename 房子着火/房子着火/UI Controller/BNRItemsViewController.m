@@ -14,7 +14,7 @@
 
 @interface BNRItemsViewController()
 
-@property (nonatomic, strong) IBOutlet UIView *headerView;
+//@property (nonatomic, strong) IBOutlet UIView *headerView;
 
 @end
 
@@ -23,9 +23,14 @@
 - (instancetype)init {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
-//        for (int i = 0; i < 5; ++i) {
-//            [[BNRItemStore sharedStore] createItem];
-//        }
+        self.navigationItem.title = @"🏠着火🐲";
+
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
+                initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                     target:self
+                                     action:@selector(addNewItem:)];
+        self.navigationItem.rightBarButtonItem = bbi;
+        self.navigationItem.leftBarButtonItem = self.editButtonItem;
     }
 
     return self;
@@ -43,23 +48,23 @@
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
 }
 
-- (IBAction)toggleEditingMode:(id)sender {
-    if (self.isEditing) {
-        [sender setTitle:@"编辑" forState:UIControlStateNormal];
-        [self setEditing:NO  animated:YES];
-    } else {
-        [sender setTitle:@"完成" forState:UIControlStateNormal];
-        [self setEditing:YES  animated:YES];
-    }
-}
+//- (IBAction)toggleEditingMode:(id)sender {
+//    if (self.isEditing) {
+//        [sender setTitle:@"编辑" forState:UIControlStateNormal];
+//        [self setEditing:NO  animated:YES];
+//    } else {
+//        [sender setTitle:@"完成" forState:UIControlStateNormal];
+//        [self setEditing:YES  animated:YES];
+//    }
+//}
 
 //getter and setter
-- (UIView *)headerView {
-    if (!_headerView) {
-        [[NSBundle mainBundle] loadNibNamed:@"HeaderVie" owner:self options:nil];
-    }
-    return _headerView;
-}
+//- (UIView *)headerView {
+//    if (!_headerView) {
+//        [[NSBundle mainBundle] loadNibNamed:@"HeaderVie" owner:self options:nil];
+//    }
+//    return _headerView;
+//}
 
 
 //delegate method
@@ -68,7 +73,7 @@
     [self.tableView registerClass:[UITableViewCell class]
             forCellReuseIdentifier:@"UITableViewCell"];
 
-    [self.tableView setTableHeaderView:self.headerView];
+//    [self.tableView setTableHeaderView:self.headerView];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

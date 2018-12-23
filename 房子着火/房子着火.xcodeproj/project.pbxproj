@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2EFE9E343B17DA0A2696B4D1 /* BNRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE9A911E96E510842FF6FB /* BNRItem.m */; };
-		C810F1C521CE2A2A000F0203 /* HeaderVie.xib in Resources */ = {isa = PBXBuildFile; fileRef = C810F1C421CE2A2A000F0203 /* HeaderVie.xib */; };
 		C810F1C921CF3769000F0203 /* BNRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C810F1C721CF3769000F0203 /* BNRDetailViewController.m */; };
 		C810F1CA21CF3769000F0203 /* BNRDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C810F1C821CF3769000F0203 /* BNRDetailViewController.xib */; };
 		C888987F21CA83E600C97BFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C888987E21CA83E600C97BFA /* AppDelegate.m */; };
@@ -23,7 +22,6 @@
 /* Begin PBXFileReference section */
 		2EFE93447677BDB78BF80E14 /* BNRItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItem.h; sourceTree = "<group>"; };
 		2EFE9A911E96E510842FF6FB /* BNRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItem.m; sourceTree = "<group>"; };
-		C810F1C421CE2A2A000F0203 /* HeaderVie.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderVie.xib; sourceTree = "<group>"; };
 		C810F1C621CF3769000F0203 /* BNRDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BNRDetailViewController.h; sourceTree = "<group>"; };
 		C810F1C721CF3769000F0203 /* BNRDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNRDetailViewController.m; sourceTree = "<group>"; };
 		C810F1C821CF3769000F0203 /* BNRDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BNRDetailViewController.xib; sourceTree = "<group>"; };
@@ -55,7 +53,6 @@
 		C810F1C321CE29E7000F0203 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C810F1C421CE2A2A000F0203 /* HeaderVie.xib */,
 				C810F1C821CF3769000F0203 /* BNRDetailViewController.xib */,
 			);
 			path = UI;
@@ -169,7 +166,6 @@
 				C888988A21CA83E700C97BFA /* LaunchScreen.storyboard in Resources */,
 				C888988721CA83E700C97BFA /* Assets.xcassets in Resources */,
 				C888988521CA83E600C97BFA /* Main.storyboard in Resources */,
-				C810F1C521CE2A2A000F0203 /* HeaderVie.xib in Resources */,
 				C810F1CA21CF3769000F0203 /* BNRDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
