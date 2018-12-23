@@ -6,15 +6,19 @@
 //  Copyright © 2018 杜. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
+#import <objc/runtime.h>
 #import "BNRDetailViewController.h"
 #import "BNRItem.h"
 
-@interface BNRDetailViewController ()
+@interface BNRDetailViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *serialNumberField;
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @end
 
@@ -22,6 +26,21 @@
 - (void)setItem:(BNRItem *)item {
     _item = item;
     self.navigationItem.title = item.itemName;
+}
+- (IBAction)takePicture:(id)sender {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    } else {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    imagePicker.delegate = self;
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted){
+        if (granted) {
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        }
+    }];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -51,5 +70,12 @@
     item.valueInDollars = [self.valueField.text intValue];
 }
 
+- (void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> *)info {
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    self.imageView.image = image;
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end
