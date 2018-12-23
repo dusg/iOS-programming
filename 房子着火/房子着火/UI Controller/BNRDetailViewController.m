@@ -19,6 +19,9 @@
 @end
 
 @implementation BNRDetailViewController
+- (IBAction)valueEditEnd:(UIButton *)sender {
+    [self.valueField resignFirstResponder];
+}
 - (void)setItem:(BNRItem *)item {
     _item = item;
     self.navigationItem.title = item.itemName;
@@ -50,6 +53,5 @@
     item.serialNumber = self.serialNumberField.text;
     item.valueInDollars = [self.valueField.text intValue];
 }
-
 
 @end
