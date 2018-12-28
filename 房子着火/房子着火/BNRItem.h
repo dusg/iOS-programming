@@ -15,6 +15,8 @@
 
 @property(nonatomic, readonly, strong) NSDate *dateCreated;
 
+@property (nonatomic, copy) NSString *itemKey;
+
 +(instancetype)randomItem;
 + (instancetype)itemWithItemName:(NSString *)itemName;
 

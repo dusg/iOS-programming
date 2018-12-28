@@ -9,6 +9,7 @@
 #import <CloudKit/CloudKit.h>
 #import "BNRItemStore.h"
 #import "BNRItem.h"
+#import "BNRImageStore.h"
 
 @interface BNRItemStore()
 @property(nonatomic, strong) NSMutableArray *privateItems;
@@ -32,6 +33,7 @@
 }
 
 - (void)removeItem:(BNRItem *)item {
+    [[BNRImageStore sharedInstance] deleteImageForKey:item.itemKey];
     [self.privateItems removeObjectIdenticalTo:item];
 }
 
