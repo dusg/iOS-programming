@@ -12,7 +12,8 @@
 #import "BNRItem.h"
 #import "BNRImageStore.h"
 
-@interface BNRDetailViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface BNRDetailViewController ()
+        <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *serialNumberField;
@@ -28,6 +29,9 @@
     _item = item;
     self.navigationItem.title = item.itemName;
 }
+- (IBAction)backgroundTapped:(id)sender {
+    [self.view endEditing:YES];
+}
 - (IBAction)takePicture:(id)sender {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -42,6 +46,11 @@
         }
     }];
 
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
