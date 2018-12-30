@@ -22,9 +22,21 @@
         self.finishedLines = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor grayColor];
         self.multipleTouchEnabled = YES;
+
+        UITapGestureRecognizer *doubleTapGesture = [[UITapGestureRecognizer alloc]
+                initWithTarget:self action:@selector(doubleTap:)];
+        doubleTapGesture.numberOfTapsRequired = 2;
+        doubleTapGesture.delaysTouchesBegan = YES;
+        [self addGestureRecognizer:doubleTapGesture];
     }
 
     return self;
+}
+
+- (void)doubleTap:(UIGestureRecognizer *)gestureRecognizer {
+    [self.linesInProgress removeAllObjects];
+    [self.finishedLines removeAllObjects];
+    [self setNeedsDisplay];
 }
 
 -(void)strokeLine:(DEGLine *)line {
@@ -37,12 +49,13 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-    [[UIColor blackColor] set];
     for (DEGLine *line in self.finishedLines) {
+        [[UIColor blackColor] set];
         [self strokeLine:line];
     }
 
     for (NSValue *key in self.linesInProgress) {
+        [[UIColor redColor] set];
         [self strokeLine:self.linesInProgress[key]];
     }
 }
