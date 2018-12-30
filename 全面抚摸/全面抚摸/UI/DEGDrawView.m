@@ -7,7 +7,7 @@
 #import "DEGLine.h"
 
 @interface DEGDrawView()
-@property (nonatomic, strong) DEGLine *currentLine;
+@property (nonatomic, strong) NSMutableDictionary *linesInProgress;
 @property (nonatomic, strong) NSMutableArray *finishedLines;
 @end
 
@@ -18,8 +18,10 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.linesInProgress = [[NSMutableDictionary alloc] init];
         self.finishedLines = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor grayColor];
+        self.multipleTouchEnabled = YES;
     }
 
     return self;
@@ -40,37 +42,52 @@
         [self strokeLine:line];
     }
 
-    if (self.currentLine) {
-        [[UIColor redColor] set];
-        [self strokeLine:self.currentLine];
+    for (NSValue *key in self.linesInProgress) {
+        [self strokeLine:self.linesInProgress[key]];
     }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    // 根据触摸位置创建BNRLine对象
-    CGPoint point = [touch locationInView:self];
-    self.currentLine = [[DEGLine alloc] init];
-    self.currentLine.begin = point;
-    self.currentLine.end = point;
+    for (UITouch *touch in touches) {
+        CGPoint point = [touch locationInView:self];
+        DEGLine *line = [[DEGLine alloc] init];
+        line.begin = point;
+        line.end = point;
+        NSValue *key = [NSValue valueWithNonretainedObject:touch];
+        self.linesInProgress[key] = line;
+    }
 
     [self setNeedsDisplay];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    // 根据触摸位置创建BNRLine对象
-    CGPoint point = [touch locationInView:self];
-    self.currentLine.end = point;
+    for (UITouch *touch in touches) {
+        NSValue *key = [NSValue valueWithNonretainedObject:touch];
+        DEGLine *line = self.linesInProgress[key];
+        line.end = [touch locationInView:self];
+    }
     [self setNeedsDisplay];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
-    [self.finishedLines addObject:self.currentLine];
-    self.currentLine = nil;
+    for (UITouch *touch in touches) {
+        NSValue *key = [NSValue valueWithNonretainedObject:touch];
+        DEGLine *line = self.linesInProgress[key];
+
+        [self.finishedLines addObject:line];
+        [self.linesInProgress removeObjectForKey:key];
+    }
 
     [self setNeedsDisplay];
 }
 
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
+    for (UITouch *touch in touches) {
+        NSValue *key = [NSValue valueWithNonretainedObject:touch];
+        [self.linesInProgress removeObjectForKey:key];
+    }
+
+    [self setNeedsDisplay];
+}
 
 @end
