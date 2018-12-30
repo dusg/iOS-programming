@@ -5,6 +5,7 @@
 
 #import "DEGDrawView.h"
 #import "DEGLine.h"
+#import "DEGPoint.h"
 
 @interface DEGDrawView()
 @property (nonatomic, strong) NSMutableDictionary *linesInProgress;
@@ -58,8 +59,14 @@
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     bezierPath.lineWidth = 10;
     bezierPath.lineCapStyle = kCGLineCapRound;
-    [bezierPath moveToPoint:line.begin];
-    [bezierPath addLineToPoint:line.end];
+    for (int i = 0; i < [line.points count]; ++i) {
+        CGPoint point = ((DEGPoint *)line.points[i]).point;
+        if (i == 0) {
+            [bezierPath moveToPoint:point];
+            continue;
+        }
+        [bezierPath addLineToPoint:point];
+    }
     [bezierPath stroke];
 }
 
@@ -82,13 +89,8 @@
 
 - (DEGLine *)lineAtPoint:(CGPoint)point {
     for (DEGLine *line in self.finishedLines) {
-        CGPoint start = line.begin;
-        CGPoint end = line.end;
-
-        for (CGFloat i = 0.0; i < 1.0; i += 0.05) {
-            CGFloat x = start.x + i * (end.x - start.x);
-            CGFloat y = start.y + i * (end.y - start.y);
-            if (hypot(x - point.x, y - point.y) < 20.0) {
+        for (DEGPoint *lp in line.points) {
+            if (hypot(lp.x - point.x, lp.y - point.y) < 20.0) {
                 return line;
             }
         }
@@ -101,8 +103,7 @@
     for (UITouch *touch in touches) {
         CGPoint point = [touch locationInView:self];
         DEGLine *line = [[DEGLine alloc] init];
-        line.begin = point;
-        line.end = point;
+        [line.points addObject:[DEGPoint pointWithPoint:point]];
         NSValue *key = [NSValue valueWithNonretainedObject:touch];
         self.linesInProgress[key] = line;
     }
@@ -112,9 +113,10 @@
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
     for (UITouch *touch in touches) {
+        CGPoint point = [touch locationInView:self];
         NSValue *key = [NSValue valueWithNonretainedObject:touch];
         DEGLine *line = self.linesInProgress[key];
-        line.end = [touch locationInView:self];
+        [line.points addObject:[DEGPoint pointWithPoint:point]];
     }
     [self setNeedsDisplay];
 }

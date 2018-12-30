@@ -9,4 +9,13 @@
 @implementation DEGLine {
 
 }
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.points = [[NSMutableArray alloc] init];
+    }
+
+    return self;
+}
+
 @end

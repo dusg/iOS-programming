@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2EFE908B6C2BEB1F3033C5B4 /* DEGPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE905FABA29668B7DA3BB7 /* DEGPoint.m */; };
 		2EFE91A3FDF42E9641CCC0A1 /* DEGLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE907B52E8C39EB0096071 /* DEGLine.m */; };
 		2EFE971CE1B5B7611B98D456 /* DEGDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE949F6033191D2B1C06E9 /* DEGDrawViewController.m */; };
 		2EFE9CEDA1813771349C31FF /* DEGDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE9C1B107EE224511D5289 /* DEGDrawView.m */; };
@@ -18,11 +19,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2EFE905FABA29668B7DA3BB7 /* DEGPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEGPoint.m; sourceTree = "<group>"; };
 		2EFE907B52E8C39EB0096071 /* DEGLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEGLine.m; sourceTree = "<group>"; };
 		2EFE946368E58F821E092DF6 /* DEGDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEGDrawViewController.h; sourceTree = "<group>"; };
 		2EFE949F6033191D2B1C06E9 /* DEGDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEGDrawViewController.m; sourceTree = "<group>"; };
 		2EFE94B3339B259D4394602B /* DEGDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEGDrawView.h; sourceTree = "<group>"; };
 		2EFE985BA0567630054EED3E /* DEGLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEGLine.h; sourceTree = "<group>"; };
+		2EFE9ADF1C7A02D590B7904E /* DEGPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEGPoint.h; sourceTree = "<group>"; };
 		2EFE9C1B107EE224511D5289 /* DEGDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEGDrawView.m; sourceTree = "<group>"; };
 		C85C617021D86FDE005F09D9 /* 全面抚摸.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "全面抚摸.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C85C617321D86FDE005F09D9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -50,6 +53,8 @@
 			children = (
 				2EFE907B52E8C39EB0096071 /* DEGLine.m */,
 				2EFE985BA0567630054EED3E /* DEGLine.h */,
+				2EFE905FABA29668B7DA3BB7 /* DEGPoint.m */,
+				2EFE9ADF1C7A02D590B7904E /* DEGPoint.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 				2EFE91A3FDF42E9641CCC0A1 /* DEGLine.m in Sources */,
 				2EFE9CEDA1813771349C31FF /* DEGDrawView.m in Sources */,
 				2EFE971CE1B5B7611B98D456 /* DEGDrawViewController.m in Sources */,
+				2EFE908B6C2BEB1F3033C5B4 /* DEGPoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

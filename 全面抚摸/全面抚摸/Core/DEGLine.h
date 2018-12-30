@@ -8,6 +8,5 @@
 
 
 @interface DEGLine : NSObject
-@property (nonatomic) CGPoint begin;
-@property (nonatomic) CGPoint end;
+@property (nonatomic, strong) NSMutableArray * points;
 @end
