@@ -9,6 +9,7 @@
 @interface DEGDrawView()
 @property (nonatomic, strong) NSMutableDictionary *linesInProgress;
 @property (nonatomic, strong) NSMutableArray *finishedLines;
+@property (nonatomic, weak) DEGLine *selectedLine;
 @end
 
 @implementation DEGDrawView {
@@ -28,9 +29,23 @@
         doubleTapGesture.numberOfTapsRequired = 2;
         doubleTapGesture.delaysTouchesBegan = YES;
         [self addGestureRecognizer:doubleTapGesture];
+
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
+                initWithTarget:self action:@selector(tap:)];
+        tapGestureRecognizer.delaysTouchesBegan = YES;
+        [tapGestureRecognizer requireGestureRecognizerToFail:doubleTapGesture];
+        [self addGestureRecognizer:tapGestureRecognizer];
     }
 
     return self;
+}
+
+- (void)tap:(UIGestureRecognizer *)gr {
+    NSLog(@"Recognized tap");
+    CGPoint point = [gr locationInView:self];
+    self.selectedLine = [self lineAtPoint:point];
+
+    [self setNeedsDisplay];
 }
 
 - (void)doubleTap:(UIGestureRecognizer *)gestureRecognizer {
@@ -58,6 +73,28 @@
         [[UIColor redColor] set];
         [self strokeLine:self.linesInProgress[key]];
     }
+
+    if (self.selectedLine) {
+        [[UIColor greenColor] set];
+        [self strokeLine:self.selectedLine];
+    }
+}
+
+- (DEGLine *)lineAtPoint:(CGPoint)point {
+    for (DEGLine *line in self.finishedLines) {
+        CGPoint start = line.begin;
+        CGPoint end = line.end;
+
+        for (CGFloat i = 0.0; i < 1.0; i += 0.05) {
+            CGFloat x = start.x + i * (end.x - start.x);
+            CGFloat y = start.y + i * (end.y - start.y);
+            if (hypot(x - point.x, y - point.y) < 20.0) {
+                return line;
+            }
+        }
+    }
+
+    return nil;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
