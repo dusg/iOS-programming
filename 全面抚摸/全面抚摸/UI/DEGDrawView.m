@@ -6,10 +6,11 @@
 #import "DEGDrawView.h"
 #import "DEGLine.h"
 
-@interface DEGDrawView()
+@interface DEGDrawView() <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) NSMutableDictionary *linesInProgress;
 @property (nonatomic, strong) NSMutableArray *finishedLines;
 @property (nonatomic, weak) DEGLine *selectedLine;
+@property (nonatomic, strong) UIPanGestureRecognizer *moveRecognizer;
 @end
 
 @implementation DEGDrawView {
@@ -35,9 +36,70 @@
         tapGestureRecognizer.delaysTouchesBegan = YES;
         [tapGestureRecognizer requireGestureRecognizerToFail:doubleTapGesture];
         [self addGestureRecognizer:tapGestureRecognizer];
+
+        UILongPressGestureRecognizer *pressRecognizer = [[UILongPressGestureRecognizer alloc]
+                initWithTarget:self action:@selector(longPress:)];
+        [self addGestureRecognizer:pressRecognizer];
+
+        self.moveRecognizer = [[UIPanGestureRecognizer alloc]
+                initWithTarget:self action:@selector(moveLine:)];
+        self.moveRecognizer.delegate = self;
+        self.moveRecognizer.cancelsTouchesInView = NO;
+        [self addGestureRecognizer:self.moveRecognizer];
     }
 
     return self;
+}
+
+- (void)moveLine:(UIPanGestureRecognizer *)gr {
+    if (!self.selectedLine) {
+        return;
+    }
+    if (gr.state == UIGestureRecognizerStateChanged) {
+        CGPoint move = [gr translationInView:self];
+        CGPoint begin = self.selectedLine.begin;
+        CGPoint end = self.selectedLine.end;
+
+        begin.x += move.x;
+        end.x += move.x;
+        begin.y += move.y;
+        end.y += move.y;
+
+        self.selectedLine.begin = begin;
+        self.selectedLine.end = end;
+
+        [self setNeedsDisplay];
+
+        [gr setTranslation:CGPointZero inView:self];
+        return;
+    }
+    if (gr.state == UIGestureRecognizerStateEnded) {
+        self.selectedLine = nil;
+        return;
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    if (gestureRecognizer == self.moveRecognizer) {
+        return YES;
+    }
+
+    return NO;
+}
+
+- (void)longPress:(UIGestureRecognizer *)gr {
+    if (gr.state == UIGestureRecognizerStateBegan) {
+        CGPoint point = [gr locationInView:self];
+        self.selectedLine = [self lineAtPoint:point];
+        if (self.selectedLine) {
+            [self.linesInProgress removeAllObjects];
+        } else if (gr.state == UIGestureRecognizerStateEnded) {
+            self.selectedLine = nil;
+        }
+    }
+
+    [self setNeedsDisplay];
 }
 
 - (void)tap:(UIGestureRecognizer *)gr {
