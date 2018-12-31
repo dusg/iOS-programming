@@ -45,7 +45,29 @@
     CGPoint point = [gr locationInView:self];
     self.selectedLine = [self lineAtPoint:point];
 
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    if (self.selectedLine) {
+        [self becomeFirstResponder];
+        // 创建一个新的标题为“Delete”的UIMenuItem对象
+        UIMenuItem *delete = [[UIMenuItem alloc]
+                initWithTitle:@"删除" action:@selector(deleteLine:)];
+        menu.menuItems = @[delete];
+        [menu setTargetRect:CGRectMake(point.x, point.y, 2, 2) inView:self];
+        [menu setMenuVisible:YES animated:YES];
+    } else {
+        [menu setMenuVisible:NO animated:YES];
+    }
+
     [self setNeedsDisplay];
+}
+
+- (void)deleteLine:(id)sender {
+    [self.finishedLines removeObject:self.selectedLine];
+    [self setNeedsDisplay];
+}
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
 }
 
 - (void)doubleTap:(UIGestureRecognizer *)gestureRecognizer {
