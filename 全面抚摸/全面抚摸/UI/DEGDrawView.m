@@ -55,6 +55,11 @@
     if (!self.selectedLine) {
         return;
     }
+    if (gr.state == UIGestureRecognizerStateBegan) {
+        CGPoint p = [gr locationInView:self];
+        self.selectedLine = [self lineAtPoint:p];
+        return;
+    }
     if (gr.state == UIGestureRecognizerStateChanged) {
         CGPoint move = [gr translationInView:self];
         CGPoint begin = self.selectedLine.begin;
@@ -182,6 +187,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
+    self.selectedLine = nil;
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    [menu setMenuVisible:NO animated:YES];
     for (UITouch *touch in touches) {
         CGPoint point = [touch locationInView:self];
         DEGLine *line = [[DEGLine alloc] init];
