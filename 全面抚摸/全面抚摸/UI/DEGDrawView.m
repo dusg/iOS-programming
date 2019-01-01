@@ -11,6 +11,7 @@
 @property (nonatomic, strong) NSMutableArray *finishedLines;
 @property (nonatomic, weak) DEGLine *selectedLine;
 @property (nonatomic, strong) UIPanGestureRecognizer *moveRecognizer;
+@property(nonatomic) CGFloat velocity;
 @end
 
 @implementation DEGDrawView {
@@ -52,6 +53,11 @@
 }
 
 - (void)moveLine:(UIPanGestureRecognizer *)gr {
+    CGPoint vXY = [gr velocityInView:self];
+    CGFloat v = hypot(vXY.x, vXY.y);
+    NSLog(@"速度是：%f", v);
+    self.velocity = v;
+
     if (!self.selectedLine) {
         return;
     }
@@ -145,7 +151,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 -(void)strokeLine:(DEGLine *)line {
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-    bezierPath.lineWidth = 10;
+    bezierPath.lineWidth = 1.0/(self.velocity+1.0) * 500;
     bezierPath.lineCapStyle = kCGLineCapRound;
     [bezierPath moveToPoint:line.begin];
     [bezierPath addLineToPoint:line.end];
