@@ -31,6 +31,11 @@
 }
 - (IBAction)backgroundTapped:(id)sender {
     [self.view endEditing:YES];
+//    for (UIView *subview in self.view.subviews) {
+//        if ([subview hasAmbiguousLayout]) {
+//            [subview exerciseAmbiguityInLayout];
+//        }
+//    }
 }
 - (IBAction)takePicture:(id)sender {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -52,7 +57,13 @@
     [textField resignFirstResponder];
     return YES;
 }
-
+//- (void)viewDidLayoutSubviews {
+//    for (UIView *subview in self.view.subviews) {
+//        if ([subview hasAmbiguousLayout]) {
+//            NSLog(@"AMBIGUOUS: %@", subview);
+//        }
+//    }
+//}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 

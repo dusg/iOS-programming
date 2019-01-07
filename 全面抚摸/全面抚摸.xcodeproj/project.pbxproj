@@ -325,6 +325,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9EMX3MM8QU;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					VIEW_DEBUG,
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "全面抚摸/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
