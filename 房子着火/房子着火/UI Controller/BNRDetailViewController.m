@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *serialNumberField;
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @end
@@ -100,6 +100,15 @@ didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> 
     self.imageView.image = image;
 
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.imageView = [[UIImageView alloc] initWithImage:nil];
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    // 告诉自动布局系统不要将自动缩放掩码转换为约束
+    self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:self.imageView];
 }
 
 @end
